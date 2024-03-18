@@ -6,9 +6,11 @@ public class LeetCode2 {
     public static void main(String[] args) {
         String [] list = new String[] {"flower","flow","flight"};
 
-        String s = "()[]{}";
-        System.out.println(strStr("dasdasdleetcode","leet"));
-        System.out.println(strStr("a","a"));
+        String s = "   fly me   to   the moon  ";
+        int[] nums = {1,2, 3, 5, 6,7,8,9};
+//        System.out.println(strStr("dasdasdleetcode","leet"));
+//        System.out.println(strStr("a","a"));
+        System.out.println(lengthOfLastWord(s));
     }
     public static String longestCommonPrefix(String[] str) {
         int arrayLength = str.length;
@@ -75,17 +77,37 @@ public class LeetCode2 {
     }
 
     public static int searchInsert(int[] nums, int target) {
-        int i = nums.length;
-        int currentNum = nums[i-1];
-        if (currentNum == target) {
-            return i;
+        int r = nums.length;
+        int l = 0;
+        while (l<=r){
+            int mid = (l+r)/2;
+            if (nums[mid] == target){
+                return mid;
+            } else if (nums[mid] < target) {
+              l =  mid + 1;
+            } else {
+              r = mid - 1;
+            }
         }
-        else if (currentNum < target){
-            return i+1;
-        }
-        else {
-            return -1;
-        }
+        return -1;
     }
 
-}
+    public static int lengthOfLastWord(String s) {
+        String[] list = s.split(" ");
+        boolean check = false;
+        int i = s.length()-1;
+        int count = 0;
+        while (!check){
+            char newS = s.charAt(i);
+            if (' ' != newS) {
+                count += 1;
+                if (s.charAt(i-1) == ' ') {
+                    check = true;
+                }
+            }
+            i--;
+        }
+        System.out.println(s.trim());
+        return count;
+    }
+    }
